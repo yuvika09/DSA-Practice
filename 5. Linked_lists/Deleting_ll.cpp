@@ -92,6 +92,6 @@ int main()
     l.InsertNode(2, 7);
     l.InsertNode(3, 17);
     l.InsertNode(4, 47);
-    l.DeleteNode(3);
+    l.DeleteNode(5);
     l.Display();
 }

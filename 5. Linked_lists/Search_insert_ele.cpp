@@ -120,13 +120,14 @@ void LinkedList::InsertSorted(int data)
         newNode->next = prev->next;
         prev->next = newNode;
     }
-}
+}  
 
 int main()
 {
     int A[] = {1, 2, 3, 4, 5, 8, 16};
     LinkedList l(A, 7);
-    l.InsertSorted(0);
+    // l.InsertSorted(78);
+    l.InsertNode(7, 67);
     l.Display();
     return 0;
 }
