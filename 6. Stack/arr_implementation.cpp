@@ -7,13 +7,13 @@ using namespace std;
 class Stack
 {
 private:
-    int *arr; // dynamic array
+    int *arr; // array made dynamically
     int top;
 
 public:
     Stack()
     {
-        arr = new int[n];
+        arr = new int[n];       //memory allocated to arr
         top = -1;
     }
 
@@ -56,6 +56,7 @@ public:
 int main()
 {
     Stack st;
+    cout << st.Empty() << endl;
     st.Push(1);
     st.Push(2);
     st.Push(3);
