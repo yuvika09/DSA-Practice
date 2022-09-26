@@ -19,11 +19,15 @@ int main()
     cin >> a;
     int arr[a];
     for (int i = 0; i < a; i++)
+    {
         cin >> arr[i];
+    }
     int num;
     cin >> num;
     insert(arr, num, a);
     for (int i = 0; i < a + 1; i++)
+    {
         cout << arr[i] << " ";
+    }
     return 0;
 }

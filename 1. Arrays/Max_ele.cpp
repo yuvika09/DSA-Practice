@@ -1,4 +1,4 @@
-// Using Moore's Voting Algorithm
+// Using Moore's Voting Algorithm to find majority element in the array
 
 #include <bits/stdc++.h>
 using namespace std;
