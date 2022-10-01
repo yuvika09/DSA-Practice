@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 #define ll long long
-#define ull unsigned long long
 using namespace std;
 
 int main()
@@ -9,11 +8,14 @@ int main()
     cin >> T;
     while (T--)
     {
-        int n, m;
-        cin >> n >> m;
-        ll ans = 0;
+        int n, fl = 0;
+        cin >> n;
+        int d[n], a[n];
+        for (int i = 0; i < n; i++)
+        {
+            cin >> d[i];
+        }
         
-        cout << ans << endl;
     }
     return 0;
 }

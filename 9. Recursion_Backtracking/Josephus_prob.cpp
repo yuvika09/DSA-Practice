@@ -6,7 +6,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int jose(int n, int k)
+int josephus(int n, int k)
 {
     if (n == 1)
     {
@@ -14,13 +14,13 @@ int jose(int n, int k)
     }
     else
     {
-        return ((jose(n - 1, k) + k) % n);
+        return ((josephus(n - 1, k) + k) % n);
     }
 }
 
 int main()
 {
     int n = 5, k = 3;
-    cout << jose(n, k) << endl;
+    cout << josephus(n, k) << endl;
     return 0;
 }
