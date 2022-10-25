@@ -3,6 +3,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//TLE for some cases
 void printMax(int arr[], int n, int k)
 {
     deque<int> dq;
@@ -32,6 +33,30 @@ void printMax(int arr[], int n, int k)
         dq.push_back(i);
     }
     cout << arr[dq.front()] << " ";
+}
+
+void printKMax(int arr[], int n, int k)
+{
+    deque<int> q;
+    for (int i = 0; i < n; ++i)
+    {
+        while (!q.empty() && arr[q.front()] < arr[i])
+            q.pop_front();
+
+        q.push_front(i);
+
+        if (i + 1 >= k)
+        {
+            cout << arr[q.back()];
+            if (i + 1 == n)
+                cout << "\n";
+            else
+                cout << " ";
+
+            if (q.back() == i + 1 - k)
+                q.pop_back();
+        }
+    }
 }
 
 int main()

@@ -1,30 +1,42 @@
 #include <bits/stdc++.h>
 #define ll long long
 #define ull unsigned long long
+
 using namespace std;
+
+ll findAns(int r, int a)
+{
+    ll ans = 0;
+    ans = (r / a) + (r % a);
+    return ans;
+}
+
+void solve()
+{
+    int l, r, a;
+    ll ans = 0;
+    cin >> l >> r >> a;
+    if (r % a == 0)
+    {
+        ans = findAns(r, a);
+    }
+    else
+    {
+        ans = findAns(r - 1, a);
+    }
+    cout << ans;
+}
 
 int main()
 {
-    int T;
-    cin >> T;
-    while (T--)
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL), cout.tie(NULL);
+    int q = 1;
+    cin >> q;
+    while (q--)
     {
-        int x1, y1, x2, y2, x3, y3;
-        int ans = 0;
-        cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-        if (y1 == y2 && y2 > y3)
-        {
-            ans = abs(x1 - x2);
-        }
-        else if (y1 == y3 && y1 > y2)
-        {
-            ans = abs(x1 - x3);
-        }
-        else if (y3 == y2 && y2 > y1)
-        {
-            ans = abs(x2 - x3);
-        }
-        cout << ans << endl;
+        solve();
+        cout << endl;
     }
     return 0;
 }

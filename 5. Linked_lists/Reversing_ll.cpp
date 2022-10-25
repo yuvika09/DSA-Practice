@@ -101,6 +101,18 @@ void ReversingByLink(Node *&head)
 //     return prev;
 // }
 
+Node *recReverse(Node *&head)
+{
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    Node *newHead = recReverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return newHead;
+}
+
 int main()
 {
     Node *head = NULL;
@@ -113,8 +125,11 @@ int main()
     InsertAtEnd(head, 7);
     InsertAtEnd(head, 8);
     // ReverseKnodes(head, 2);
-    ReversingByEle(head);
+    // ReversingByEle(head);
     // ReversingByLink(head);
     Display(head);
+    cout << endl;
+    Node *head2 = recReverse(head);
+    Display(head2);
     return 0;
 }
