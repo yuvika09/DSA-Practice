@@ -1,46 +1,25 @@
 #include <bits/stdc++.h>
 #define ll long long
 #define ull unsigned long long
-
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * b / gcd(a, b))
+ 
 using namespace std;
-
+ 
 void solve()
 {
-    int a, ans = 0;
-    map<int, int> m;
-    cin >> a;
-    int arr[a];
-    for (int i = 0; i < a; i++)
-    {
-        cin >> arr[i];
-        m[arr[i]]++;
-    }
-    ans = m[4] + m[3] + ceil((float)(m[2]) / 2.0);
-    if (m[1] > m[3])
-    {
-        m[1] -= m[3];
-    }
-    else
-    {
-        m[1] = 0;
-    }
-    if (m[2] % 2 == 1 && m[1] > 0)
-    {
-        m[1] -= 2;
-    }
-    if (m[1] > 0)
-    {
-        ans += ceil((float)(m[1]) / 4.0);
-    }
-    cout << ans;
+    int n;
+    cin >> n;
+    int a[n];
+    
 }
-
+ 
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL), cout.tie(NULL);
     int q = 1;
-    // cin >> q;
+    cin >> q;
     while (q--)
     {
         solve();

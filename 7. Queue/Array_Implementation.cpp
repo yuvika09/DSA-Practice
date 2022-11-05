@@ -9,14 +9,14 @@ class Queue
 private:
     int *arr;
     int front;
-    int back;
+    int rear;
 
 public:
     Queue()
     {
         arr = new int[n];       //dynamic array
         front = -1;
-        back = -1;
+        rear = -1;
     }
     void Enque(int val)
     {
@@ -29,12 +29,12 @@ public:
         {
             front++;
         }
-        back++;
-        arr[back] = val;
+        rear++;
+        arr[rear] = val;
     }
     void Deque()
     {
-        if (front == -1 || front > back)
+        if (front == -1 || front > rear)
         {
             cout << "Queue Underflow" << endl;
             return;
@@ -44,7 +44,7 @@ public:
 
     int Peek()
     {
-        if (front == -1 || front > back)
+        if (front == -1 || front > rear)
         {
             cout << "Queue Underflow" << endl;
             return -1;
@@ -53,7 +53,7 @@ public:
     }
     bool isEmpty()
     {
-        if (front == -1 || front > back)
+        if (front == -1 || front > rear)
         {
             return true;
         }

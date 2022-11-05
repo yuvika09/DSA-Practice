@@ -18,11 +18,11 @@ void solve()
     cin >> l >> r >> a;
     if (r % a == 0)
     {
-        ans = findAns(r, a);
+        ans = (r / a) + (r % a);
     }
     else
     {
-        ans = findAns(r - 1, a);
+        ans = (r / a) + (r % a);
     }
     cout << ans;
 }
