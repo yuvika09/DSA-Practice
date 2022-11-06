@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <stack>
 using namespace std;
 
 class node
@@ -104,22 +105,24 @@ void postorderTraversal(node *root)
     cout << root->data << " ";
 }
 
+
+
 int main()
 {
-    //1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
+    // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
     node *root = NULL;
     root = buildTree(root);
 
-    cout << "Level order traversal : " << endl;
-    levelOrderTraversal(root);
+    // cout << "Level order traversal : " << endl;
+    // levelOrderTraversal(root);
 
     cout << "Inorder Traversal is : " << endl;
     inorderTraversal(root);
+    
+    // cout << "Preorder Traversal is : " << endl;
+    // preorderTraversal(root);
 
-    cout << "Preorder Traversal is : " << endl;
-    preorderTraversal(root);
-
-    cout << "Postorder Traversal is : " << endl;
-    postorderTraversal(root);
+    // cout << "Postorder Traversal is : " << endl;
+    // postorderTraversal(root);
     return 0;
 }
