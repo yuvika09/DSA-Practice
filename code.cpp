@@ -1,19 +1,53 @@
 #include <bits/stdc++.h>
 #define ll long long
-#define ull unsigned long long
-#define gcd(a, b) __gcd(a, b)
-#define lcm(a, b) (a * b / gcd(a, b))
- 
 using namespace std;
- 
+
+void primeFactors(ll n, set<int> &s)
+{
+    while (n % 2 == 0)
+    {
+        s.insert(2);
+        n = n / 2;
+    }
+    for (int i = 3; i <= sqrt(n); i = i + 2)
+    {
+        while (n % i == 0)
+        {
+            s.insert(i);
+            n = n / i;
+        }
+    }
+    if (n > 2)
+    {
+        s.insert(n);
+    }
+}
+
 void solve()
 {
-    int n;
-    cin >> n;
-    int a[n];
-    
+    ll a, b;
+    cin >> a >> b;
+    bool fl = 1;
+    set<int> s;
+    primeFactors(b, s);
+    for (auto i : s)
+    {
+        if (a % i != 0)
+        {
+            fl = 0;
+        }
+        // cout << i << " ";
+    }
+    if (fl == 1)
+    {
+        cout << "YES";
+    }
+    else
+    {
+        cout << "NO";
+    }
 }
- 
+
 int main()
 {
     ios_base::sync_with_stdio(false);

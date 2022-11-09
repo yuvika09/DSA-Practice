@@ -1,6 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <queue>
+// MEDIUM
+
+#include <bits/stdc++.h>
 using namespace std;
 
 class node
@@ -60,6 +60,71 @@ void rightView(node *root, vector<int> &ans, int level)
     leftView(root->left, ans, level + 1);
 }
 
+void topView(node *root, vector<int> &ans)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    map<int, int> m;
+    queue<pair<node *, int>> q;
+    q.push({root, 0});
+    while (!q.empty())
+    {
+        auto it = q.front();
+        q.pop();
+        node *temp = it.first;
+        int line = it.second;
+        if (m.find(line) == m.end())
+        {
+            m[line] = temp->data;
+        }
+        if (temp->left)
+        {
+            q.push({temp->left, line - 1});
+        }
+        if (temp->right)
+        {
+            q.push({temp->right, line + 1});
+        }
+    }
+    for (auto i : m)
+    {
+        cout << i.second << " ";
+    }
+}
+
+void bottomView(node *root, vector<int> &ans)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    map<int, int> m;
+    queue<pair<node *, int>> q;
+    q.push({root, 0});
+    while (!q.empty())
+    {
+        auto it = q.front();
+        q.pop();
+        node *temp = it.first;
+        int line = it.second;
+        m[line] = temp->data;
+        if (temp->left)
+        {
+            q.push({temp->left, line - 1});
+        }
+        if (temp->right)
+        {
+            q.push({temp->right, line + 1});
+        }
+    }
+    for (auto i : m)
+    {
+        cout << i.second << " ";
+    }
+}
+
 void levelOrderTraversal(node *root)
 {
     queue<node *> q;
@@ -70,7 +135,6 @@ void levelOrderTraversal(node *root)
     {
         node *temp = q.front();
         q.pop();
-
         if (temp == NULL) // if current level is traversed
         {
             cout << endl;
@@ -104,24 +168,41 @@ int main()
     cout << "Level order traversal : " << endl;
     levelOrderTraversal(root);
 
-    cout << "Left View of the tree is: " << endl;
-    vector<int> ans1;
-    leftView(root, ans1, 0);
-    for (auto i : ans1)
+    // cout << "Left View of the tree is: " << endl;
+    // vector<int> ans1;
+    // leftView(root, ans1, 0);
+    // for (auto i : ans1)
+    // {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
+
+    // cout << "Right View of the tree is: " << endl;
+    // vector<int> ans2;
+    // rightView(root, ans2, 0);
+    // for (auto i : ans2)
+    // {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
+
+    // cout << "Top View of the tree is: " << endl;
+    // vector<int> ans3;
+    // topView(root, ans3);
+    // for (auto i : ans3)
+    // {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
+
+    cout << "Bottom View of the tree is: " << endl;
+    vector<int> ans4;
+    bottomView(root, ans4);
+    for (auto i : ans4)
     {
         cout << i << " ";
     }
     cout << endl;
-
-    cout << "Right View of the tree is: " << endl;
-    vector<int> ans2;
-    rightView(root, ans2, 0);
-    for (auto i : ans2)
-    {
-        cout << i << " ";
-    }
-    cout << endl;
-
 
     return 0;
 }

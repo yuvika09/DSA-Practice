@@ -1,6 +1,6 @@
-#include <iostream>
-#include <queue>
-#include <stack>
+// DIFFICULT
+
+#include <bits/stdc++.h>
 using namespace std;
 
 class node
@@ -47,6 +47,7 @@ void levelOrderTraversal(node *root)
     {
         node *temp = q.front();
         q.pop();
+
         if (temp == NULL) // if current level is traversed
         {
             cout << endl;
@@ -71,55 +72,54 @@ void levelOrderTraversal(node *root)
     }
 }
 
-void inorderTraversal(node *root)
+vector<vector<int>> verticalTraversal(node *root)
 {
-    if (root == NULL)
+    map<int, map<int, multiset<int>>> nodes;
+    queue<pair<node *, pair<int, int>>> todo;
+    todo.push({root, {0, 0}});
+    while (!todo.empty())
     {
-        return;
+        auto p = todo.front();
+        todo.pop();
+        node *temp = p.first;
+        int x = p.second.first, y = p.second.second;
+        nodes[x][y].insert(temp->data);
+        if (temp->left)
+        {
+            todo.push({temp->left, {x - 1, y + 1}});
+        }
+        if (temp->right)
+        {
+            todo.push({temp->right, {x + 1, y + 1}});
+        }
     }
-    inorderTraversal(root->left);
-    cout << root->data << " ";
-    inorderTraversal(root->right);
-}
-
-void preorderTraversal(node *root)
-{
-    if (root == NULL)
+    vector<vector<int>> ans;
+    for (auto i : nodes)
     {
-        return;
+        vector<int> col;
+        for (auto j : i.second)
+        {
+            col.insert(col.end(), j.second.begin(), j.second.end());
+        }
+        ans.push_back(col);
     }
-    cout << root->data << " ";
-    preorderTraversal(root->left);
-    preorderTraversal(root->right);
-}
-
-void postorderTraversal(node *root)
-{
-    if (root == NULL)
-    {
-        return;
-    }
-    postorderTraversal(root->left);
-    postorderTraversal(root->right);
-    cout << root->data << " ";
+    return ans;
 }
 
 int main()
 {
-    // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
     node *root = NULL;
     root = buildTree(root);
+    levelOrderTraversal(root);
+    vector<vector<int>> v = verticalTraversal(root);
 
-    // cout << "Level order traversal : " << endl;
-    // levelOrderTraversal(root);
-
-    cout << "Inorder Traversal is : " << endl;
-    inorderTraversal(root);
-    
-    // cout << "Preorder Traversal is : " << endl;
-    // preorderTraversal(root);
-
-    // cout << "Postorder Traversal is : " << endl;
-    // postorderTraversal(root);
+    for (int i = 0; i < v.size(); i++)
+    {
+        for (int j = 0; j < v[i].size(); j++)
+        {
+            cout << v[i][j] << " ";
+        }
+        cout << endl;
+    }
     return 0;
 }
