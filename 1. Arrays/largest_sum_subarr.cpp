@@ -11,6 +11,24 @@ using namespace std;
 ll bruteSum(int arr[])
 {
     ll maxSum = INT_MIN;
+    ll sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i; j < n; j++)
+        {
+            for (int k = i; k < j; k++)
+            {
+                sum += arr[k];
+                maxSum = max(maxSum, sum);
+            }
+        }
+    }
+    return maxSum;
+}
+
+ll optimizedSum(int arr[])
+{
+    ll maxSum = INT_MIN;
     for (int i = 0; i < n; i++)
     {
         ll sum = 0;
