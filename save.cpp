@@ -1,32 +1,23 @@
 #include <bits/stdc++.h>
 #define ll long long
 #define ull unsigned long long
-
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * b / gcd(a, b))
+ 
 using namespace std;
-
-ll findAns(int r, int a)
-{
-    ll ans = 0;
-    ans = (r / a) + (r % a);
-    return ans;
-}
-
+ 
 void solve()
 {
-    int l, r, a;
-    ll ans = 0;
-    cin >> l >> r >> a;
-    if (r % a == 0)
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n; i++)
     {
-        ans = (r / a) + (r % a);
+        cin >> a[i];
     }
-    else
-    {
-        ans = (r / a) + (r % a);
-    }
-    cout << ans;
+    
 }
-
+ 
 int main()
 {
     ios_base::sync_with_stdio(false);

@@ -1,60 +1,30 @@
 #include <bits/stdc++.h>
-using namespace std;
 #define ll long long
-
-int solve()
+#define ull unsigned long long
+using namespace std;
+ 
+void solve()
 {
     int n;
     cin >> n;
-    int arr[n];
-    map<int, int> mp;
+    int a[n];
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
-        mp[arr[i]]++;
+        cin >> a[i];
     }
-    if (mp.size() == n)
-        return 0;
-    int r, q;
-    bool pp = false;
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = i + 1; j < n; j++)
-        {
-            if (arr[i] == arr[j])
-            {
-                r = j + 1;
-                q = arr[j];
-                pp = true;
-                break;
-            }
-        }
-        if (pp == true)
-            break;
-    }
-    int ccc = 0;
-    for (int p = r; p < n; p++)
-    {
-        if (arr[p] != q)
-            ccc++;
-    }
-    if (ccc <= 2)
-        return 1;
-    else
-        return 0;
+    
 }
+ 
 int main()
 {
-    int tc;
-    cin >> tc;
-    while (tc--)
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL), cout.tie(NULL);
+    int q = 1;
+    cin >> q;
+    while (q--)
     {
-
-        int aaa = solve();
-        if (aaa == 0)
-            cout << "NO" << endl;
-        else
-            cout << "YES" << endl;
+        solve();
+        cout << endl;
     }
     return 0;
 }

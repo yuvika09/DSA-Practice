@@ -5,17 +5,17 @@
 
 #include <bits/stdc++.h>
 #define ll long long
-#define n 6
+#define n 8
 using namespace std;
 
 ll bruteSum(int arr[])
 {
     ll maxSum = INT_MIN;
-    ll sum = 0;
     for (int i = 0; i < n; i++)
     {
         for (int j = i; j < n; j++)
         {
+            ll sum = 0;
             for (int k = i; k < j; k++)
             {
                 sum += arr[k];
@@ -41,35 +41,41 @@ ll optimizedSum(int arr[])
     return maxSum;
 }
 
-// ll kadaneAlgo(int arr[]){
-//     ll maxSum = 0, currSum = 0;
+// int kadaneAlgo(int arr[])
+// {
+//     int maxSum = INT_MIN, currSum = 0, maxEle = INT_MIN;
 //     for (int i = 0; i < n; i++)
 //     {
 //         currSum += arr[i];
 //         maxSum = max(maxSum, currSum);
-//         if(currSum < 0)
+//         if (currSum < 0)
 //             currSum = 0;
+//         maxEle = max(maxSum, arr[i]);
 //     }
-//     return maxSum;
+//     return maxEle;
 // }
 
 int kadaneAlgo(int arr[])
 {
-    int maxSum = INT_MIN, currSum = 0, maxEle = INT_MIN;
+    int maxSum = arr[0], sum = 0;
     for (int i = 0; i < n; i++)
     {
-        currSum += arr[i];
-        maxSum = max(maxSum, currSum);
-        if (currSum < 0)
-            currSum = 0;
-        maxEle = max(maxSum, arr[i]);
+        sum += arr[i];
+        maxSum = max(sum, maxSum);
+        if (sum < 0)
+        {
+            sum = 0;
+        }
     }
-    return maxEle;
+    return maxSum;
 }
 
 int main()
 {
-    int arr[] = {-5, 3, 6, 3, -4, 1};
-    cout << kadaneAlgo(arr) << endl;
+    int arr[] = {-2, -3, 4, -1, -2, 1, 5, -3};
+
+    cout << bruteSum(arr) << endl;
+    // cout << kadaneAlgo(arr) << endl;
+    
     return 0;
 }

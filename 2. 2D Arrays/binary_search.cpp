@@ -1,3 +1,5 @@
+//First integer of each row is greater than the last integer of previous row.
+
 #include <bits/stdc++.h>
 using namespace std;
 
