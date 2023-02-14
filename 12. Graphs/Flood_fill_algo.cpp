@@ -5,19 +5,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(int delRow[], int delCol[], int row, int col, vector<vector<int>> &ans, vector<vector<int>> image, int iniCol, int newColor)
+void dfs(int row, int col, vector<vector<int>> &ans, vector<vector<int>> image, int iniCol, int newColor)
 {
     ans[row][col] = newColor;
     int n = image.size();
     int m = image[0].size();
-
+    int delRow[] = {-1, 0, 1, 0};
+    int delCol[] = {0, 1, 0, -1};
     for (int i = 0; i < 4; i++)
     {
         int nrow = row + delRow[i];
         int ncol = col + delCol[i];
         if (nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && image[nrow][ncol] == iniCol && ans[nrow][ncol] != newColor)
         {
-            dfs(delRow, delCol, nrow, ncol, ans, image, iniCol, newColor);
+            dfs(nrow, ncol, ans, image, iniCol, newColor);
         }
     }
 }
@@ -26,8 +27,7 @@ vector<vector<int>> floodFill(vector<vector<int>> &image, int sr, int sc, int ne
 {
     int iniCol = image[sr][sc];
     vector<vector<int>> ans = image;
-    int delRow[] = {-1, 0, 1, 0};
-    int delCol[] = {0, 1, 0, -1};
-    dfs(delRow, delCol, sr, sc, ans, image, iniCol, newColor);
+
+    dfs(sr, sc, ans, image, iniCol, newColor);
     return ans;
 }
