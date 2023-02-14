@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 #define ll long long
 #define ull unsigned long long
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * b / gcd(a, b))
+ 
 using namespace std;
  
 void solve()

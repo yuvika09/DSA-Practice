@@ -1,33 +1,50 @@
 #include <bits/stdc++.h>
-#define ll long long
-#define ull unsigned long long
-#define gcd(a, b) __gcd(a, b)
-#define lcm(a, b) (a * b / gcd(a, b))
- 
 using namespace std;
- 
-void solve()
+
+int maxSumSubarray(int arr[], int n, int k)
 {
-    int n;
-    cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++)
+    int i = 0, j = 1;
+    set<int> set;
+    set.insert(arr[0]);
+    int sum = arr[0];
+    int maxsum = sum;
+
+    while (i < n - 1 && j < n)
     {
-        cin >> a[i];
+        const bool is_in = set.find(arr[j]) != set.end();
+        if (!is_in)
+        {
+            sum = sum + arr[j];
+            if (j - i + 1 == k)
+            {
+                cout << (j - i) << "KK";
+                maxsum = max(sum, maxsum);
+            }
+            set.insert(arr[j++]);
+        }
+        else
+        {
+            sum -= arr[i];
+            set.erase(arr[i++]);
+        }
     }
     
+    return maxsum;
 }
- 
+
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL), cout.tie(NULL);
-    int q = 1;
-    cin >> q;
-    while (q--)
+    int n, k;
+    cin >> n >> k;
+    int arr[n];
+    for (int i = 0; i < n; i++)
     {
-        solve();
-        cout << endl;
+        cin >> arr[i];
+        if (arr[i] % 2 == 0)
+        {
+            arr[i]--;
+        }
     }
-    return 0;
+    int ans = maxSumSubarray(arr, n, k);
+    cout << (ans);
 }

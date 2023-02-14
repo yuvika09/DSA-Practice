@@ -1,51 +1,38 @@
 #include <bits/stdc++.h>
 #define ll long long
 #define ull unsigned long long
+#define gcd(a, b) __gcd(a, b)
+#define lcm(a, b) (a * b / gcd(a, b))
+
 using namespace std;
 
 void solve()
 {
-    int n, m, k, x, y;
-    cin >> n >> m >> k;
-    int a[m];
-    for (int i = 0; i < m; i++)
+    int n, m, count = 0;
+    cin >> n >> m;
+    vector<int> a(n);
+    for (int i = 0; i < n; i++)
     {
         cin >> a[i];
     }
-    if (n % k == 0)
+    for (int i = 0; i < n; i++)
     {
-        x = n / k;
-        for (int i = 0; i < m; i++)
-        {
-            if (a[i] > x)
-            {
-                cout << "NO";
-                return;
-            }
-        }
+        a[i] = a[i] + i;
     }
-    else
+    sort(a.begin(), a.end());
+    int i = 0;
+    while (i<n-1)
     {
-        x = n / k;
-        y = n % k;
-        // cout << x << " " << y;
-        int c = 0;
-        for (int i = 0; i < m; i++)
+        if (m - a[i] < 0)
         {
-            if (a[i] == x + 1)
-            {
-                c++;
-            }
+            break;
         }
-        if (c != y)
-        {
-            cout << "NO";
-            return;
-        }
+        m -= a[i];
+        i++;
+        count++;
     }
-    cout << "YES";
+    cout << count;
 }
-
 int main()
 {
     ios_base::sync_with_stdio(false);
