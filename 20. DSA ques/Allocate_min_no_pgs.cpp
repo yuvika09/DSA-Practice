@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+ 
 bool isPossible(int A[], int mid, int N, int M)
 {
     int st = 1, sum = 0;
