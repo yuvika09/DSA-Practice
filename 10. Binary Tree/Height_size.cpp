@@ -73,7 +73,8 @@ int maxNode(node *root) // maximum data of node stored in the tree
     return max(root->data, max(maxNode(root->left), maxNode(root->right)));
 }
 
-void printkDist(node *root, int k) // prints out the nodes at the distance k from the root node /or/ the (k+1)th level
+void printkDist(node *root, int k) 
+// prints out the nodes at the distance k from the root node /or/ the (k+1)th level
 {
     if (root == NULL)
     {

@@ -37,41 +37,6 @@ node *buildTree(node *root)
     return root;
 }
 
-void levelOrderTraversal(node *root)
-{
-    queue<node *> q;
-    q.push(root);
-    q.push(NULL);
-
-    while (!q.empty())
-    {
-        node *temp = q.front();
-        q.pop();
-
-        if (temp == NULL) // if current level is traversed
-        {
-            cout << endl;
-            if (!q.empty())
-            {
-                q.push(NULL);
-                // means more elements are left to traverse so add null in the queue
-            }
-        }
-        else
-        {
-            cout << temp->data << " ";
-            if (temp->left)
-            {
-                q.push(temp->left);
-            }
-            if (temp->right)
-            {
-                q.push(temp->right);
-            }
-        }
-    }
-}
-
 vector<vector<int>> verticalTraversal(node *root)
 {
     map<int, map<int, multiset<int>>> nodes;
@@ -97,29 +62,31 @@ vector<vector<int>> verticalTraversal(node *root)
     for (auto i : nodes)
     {
         vector<int> col;
-        for (auto j : i.second)
+        for (auto j : i.second) // traversing for map of lvl and multinodes
         {
-            col.insert(col.end(), j.second.begin(), j.second.end());
+            col.insert(col.end(), j.second.begin(), j.second.end()); // selecting and inserting nodes of multiset in vector col
+            //col.end ensures every node's data is added at the last of present vector
+            // inserting all nodes at same vertical having different levels.
         }
-        ans.push_back(col);
+        ans.push_back(col); // inserting col in ans(added for one vertical)
     }
     return ans;
 }
 
-int main()
-{
-    node *root = NULL;
-    root = buildTree(root);
-    levelOrderTraversal(root);
-    vector<vector<int>> v = verticalTraversal(root);
+// int main()
+// {
+//     node *root = NULL;
+//     root = buildTree(root);
+//     levelOrderTraversal(root);
+//     vector<vector<int>> v = verticalTraversal(root);
 
-    for (int i = 0; i < v.size(); i++)
-    {
-        for (int j = 0; j < v[i].size(); j++)
-        {
-            cout << v[i][j] << " ";
-        }
-        cout << endl;
-    }
-    return 0;
-}
+//     for (int i = 0; i < v.size(); i++)
+//     {
+//         for (int j = 0; j < v[i].size(); j++)
+//         {
+//             cout << v[i][j] << " ";
+//         }
+//         cout << endl;
+//     }
+//     return 0;
+// }

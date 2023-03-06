@@ -32,20 +32,6 @@ node *buildTree(node *root)
     return root;
 }
 
-void leftView(node *root, vector<int> &ans, int level)
-{
-    if (root == NULL)
-    {
-        return;
-    }
-    if (level == ans.size())
-    {
-        ans.push_back(root->data);
-    }
-    leftView(root->left, ans, level + 1);
-    leftView(root->right, ans, level + 1);
-}
-
 void rightView(node *root, vector<int> &ans, int level)
 {
     if (root == NULL)
@@ -60,69 +46,18 @@ void rightView(node *root, vector<int> &ans, int level)
     leftView(root->left, ans, level + 1);
 }
 
-void topView(node *root, vector<int> &ans)
+void leftView(node *root, vector<int> &ans, int level)
 {
     if (root == NULL)
     {
         return;
     }
-    map<int, int> m;
-    queue<pair<node *, int>> q;
-    q.push({root, 0});
-    while (!q.empty())
+    if (level == ans.size())
     {
-        auto it = q.front();
-        q.pop();
-        node *temp = it.first;
-        int line = it.second;
-        if (m.find(line) == m.end())
-        {
-            m[line] = temp->data;
-        }
-        if (temp->left)
-        {
-            q.push({temp->left, line - 1});
-        }
-        if (temp->right)
-        {
-            q.push({temp->right, line + 1});
-        }
+        ans.push_back(root->data);
     }
-    for (auto i : m)
-    {
-        cout << i.second << " ";
-    }
-}
-
-void bottomView(node *root, vector<int> &ans)
-{
-    if (root == NULL)
-    {
-        return;
-    }
-    map<int, int> m;
-    queue<pair<node *, int>> q;
-    q.push({root, 0});
-    while (!q.empty())
-    {
-        auto it = q.front();
-        q.pop();
-        node *temp = it.first;
-        int line = it.second;
-        m[line] = temp->data;
-        if (temp->left)
-        {
-            q.push({temp->left, line - 1});
-        }
-        if (temp->right)
-        {
-            q.push({temp->right, line + 1});
-        }
-    }
-    for (auto i : m)
-    {
-        cout << i.second << " ";
-    }
+    leftView(root->left, ans, level + 1);
+    leftView(root->right, ans, level + 1);
 }
 
 void levelOrderTraversal(node *root)
@@ -195,14 +130,14 @@ int main()
     // }
     // cout << endl;
 
-    cout << "Bottom View of the tree is: " << endl;
-    vector<int> ans4;
-    bottomView(root, ans4);
-    for (auto i : ans4)
-    {
-        cout << i << " ";
-    }
-    cout << endl;
+    // cout << "Bottom View of the tree is: " << endl;
+    // vector<int> ans4;
+    // bottomView(root, ans4);
+    // for (auto i : ans4)
+    // {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
 
     return 0;
 }

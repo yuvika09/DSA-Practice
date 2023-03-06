@@ -9,7 +9,7 @@ void dfs(int row, int col, vector<vector<int>> &ans, vector<vector<int>> image, 
 {
     ans[row][col] = newColor;
     int n = image.size();
-    int m = image[0].size();
+    int m = image[0].size(); 
     int delRow[] = {-1, 0, 1, 0};
     int delCol[] = {0, 1, 0, -1};
     for (int i = 0; i < 4; i++)
