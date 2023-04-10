@@ -5,28 +5,46 @@
 #define lcm(a, b) (a * b / gcd(a, b))
 
 using namespace std;
-
-void solve()
+class Solution
 {
-    int n;
-    cin >> n;
-    string s;
-    cin >> s;
-    map<char, int> mp1, mp2;
-    mp1[s[0]]++;
-    
-}
-
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL), cout.tie(NULL);
-    int q = 1;
-    cin >> q;
-    while (q--)
+public:
+    bool isValid(string s)
     {
-        solve();
-        cout << endl;
+        stack<char> st;
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+            {
+                st.push(s[i]);
+            }
+            else
+            {
+                if (s.empty()) // i/p == {
+                {
+                    return false;
+                }
+                if (s[i] == ')' && st.top() == '(')
+                {
+                    st.pop();
+                }
+                else if (s[i] == '}' && st.top() == '{')
+                {
+                    st.pop();
+                }
+                else if (s[i] == ']' && st.top() == '[')
+                {
+                    st.pop();
+                }
+                else // i/p == }
+                {
+                    return false;
+                }
+            }
+        }
+        if (st.size() == 0)
+        {
+            return true;
+        }
+        return false;
     }
-    return 0;
-}
+};

@@ -1,76 +1,55 @@
-//this solution might give a overflow condn 
-//use long long instead of int
-
 #include <bits/stdc++.h>
 using namespace std;
 
-class node
-{
-public:
-    int data;
-    node *left;
-    node *right;
-
-    node(int val)
-    {
-        data = val;
-        left = NULL;
-        right = NULL;
-    }
-};
-
-node *buildTree(node *root)
+struct TreeNode
 {
     int val;
-    cin >> val;
-    root = new node(val);
-    if (val == -1)
-    {
-        return NULL;
-    }
-    root->left = buildTree(root->left);
-    root->right = buildTree(root->right);
-    return root;
-}
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
 
-int maxWidth(node *root)
+int widthOfBinaryTree(TreeNode *root)
 {
-    if (root == NULL)
+    if (!root)
     {
         return 0;
     }
-    int res = 1;
-    queue<pair<node *, int>> q;
-    q.push({root, 1});
+    long long res = 0;
+    queue<pair<TreeNode *, long long>> q;
+    q.push({root, 0});
     while (!q.empty())
     {
-        int temp = q.back().second - q.front().second + 1; // width (last-first+1)
-        res = max(res, temp);
-        for (int i = 0; i < q.size(); i++)
+        long long s = q.size();
+        long long mini = q.front().second;
+        long long first, last;
+
+        for (int i = 0; i < s; i++)
         {
-            pair<node *, int> p = q.front();
-            int idx = p.second;
+            long long cur_idx = q.front().second - mini;
+            TreeNode *cur_node = q.front().first;
             q.pop();
-            if (p.first->left)
+
+            if (i == 0) // store the starting idx
             {
-                q.push({p.first->left, 2 * idx});
+                first = cur_idx;
             }
-            if (p.first->right)
+            if (i == s - 1) // store the ending idx
             {
-                q.push({p.first->right, (2 * idx) + 1});
+                last = cur_idx;
+            }
+            if (cur_node->left)
+            {
+                q.push({cur_node->left, (2 * cur_idx) + 1});
+            }
+            if (cur_node->right)
+            {
+                q.push({cur_node->right, (2 * cur_idx) + 2});
             }
         }
+        res = max(res, last - first + 1);
     }
     return res;
-}
-
-int main()
-{
-    // 10 2 4 -1 -1 5 -1 -1 3 -1 60 -1 -1
-    node *root = NULL;
-    root = buildTree(root);
-
-    cout << maxWidth(root);
-
-    return 0;
 }

@@ -1,86 +1,65 @@
-#include <iostream>
-#include <queue>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
 
-class node
+struct TreeNode
 {
-public:
-    int data;
-    node *left;
-    node *right;
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
 
-    node(int val)
+// APPROACH 1 - Using recursion
+// TC - O(N) SC - O(N)
+
+class Solution1
+{
+
+    TreeNode *prev = NULL;
+
+public:
+    void flatten(TreeNode *root)
     {
-        data = val;
-        left = NULL;
-        right = NULL;
+        if (root == NULL)
+            return;
+
+        flatten(root->right);
+        flatten(root->left);
+
+        root->right = prev;
+        root->left = NULL;
+        prev = root;
     }
 };
 
-node *buildTree(node *root)
+// APPROACH 2 - Using Morris Traversal
+// TC - O(N) SC - O(1)
+
+class Solution2
 {
-    // cout << "Enter data for node: " << endl;
-    int val;
-    cin >> val;
-    root = new node(val);
-    if (val == -1)
+
+    TreeNode *prev = NULL;
+
+public:
+    void flatten(TreeNode *root)
     {
-        return NULL;
-    }
-
-    // cout << "Enter data for left of " << val << endl;
-    root->left = buildTree(root->left);
-
-    // cout << "Enter data for right of " << val << endl;
-    root->right = buildTree(root->right);
-    return root;
-}
-
-void levelOrderTraversal(node *root)
-{
-    queue<node *> q;
-    q.push(root);
-    q.push(NULL);
-
-    while (!q.empty())
-    {
-        node *temp = q.front();
-        q.pop();
-        if (temp == NULL) // if current level is traversed
+        TreeNode *cur = root;
+        while (cur)
         {
-            cout << endl;
-            if (!q.empty())
+            if (cur->left)
             {
-                q.push(NULL);
-                // means more elements are left to traverse so add null in the queue
+                TreeNode *pre = cur->left;
+                while (prev->right)
+                {
+                    prev = prev->right;
+                }
+                prev->right = cur->right;
+                cur->right = cur->left;
+                cur->left = NULL;
             }
-        }
-        else
-        {
-            cout << temp->data << " ";
-            if (temp->left)
-            {
-                q.push(temp->left);
-            }
-            if (temp->right)
-            {
-                q.push(temp->right);
-            }
+            cur = cur->right;
         }
     }
-}
-
-
-
-int main()
-{
-    // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
-    node *root = NULL;
-    root = buildTree(root);
-
-
-    // cout << "Level order traversal : " << endl;
-    // levelOrderTraversal(root);
-    return 0;
-}
+};

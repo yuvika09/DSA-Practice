@@ -43,18 +43,6 @@ int height(node *root)
     return max(height(root->left), height(root->right)) + 1;
 }
 
-int diameter1(node *root)
-{
-    if (root == NULL)
-    {
-        return 0;
-    }
-    int d1 = 1 + height(root->left) + height(root->right);
-    int d2 = diameter1(root->left);
-    int d3 = diameter1(root->right);
-    return max(d1, max(d2, d3));
-}
-
 int size(node *root) // total number of nodes in the tree
 {
     if (root == NULL)
@@ -78,7 +66,7 @@ void printkDist(node *root, int k)
 {
     if (root == NULL)
     {
-        return;
+        return; 
     }
     if (k == 0)
     {
@@ -136,7 +124,7 @@ int main()
     // cout << maxNode(root) << endl;
     // printkDist(root, 2);
     levelOrderTraversal(root);
-    cout << diameter1(root);
+    // cout << diameter1(root);
 
     return 0;
 }

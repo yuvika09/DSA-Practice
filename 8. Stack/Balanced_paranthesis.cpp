@@ -5,45 +5,45 @@
 using namespace std;
 
 // APPROACH 1
-bool isOpening(char c)
+
+bool isValid(string s)
 {
-    if (c == '(' || c == '[' || c == '{')
+    stack<char> st;
+    for (int i = 0; i < s.length(); i++)
+    {
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+        {
+            st.push(s[i]);
+        }
+        else
+        {
+            if (st.empty()) // i/p == {
+            {
+                return false;
+            }
+            if (s[i] == ')' && st.top() == '(')
+            {
+                st.pop();
+            }
+            else if (s[i] == '}' && st.top() == '{')
+            {
+                st.pop();
+            }
+            else if (s[i] == ']' && st.top() == '[')
+            {
+                st.pop();
+            }
+            else // i/p == }
+            {
+                return false;
+            }
+        }
+    }
+    if (st.size() == 0)
     {
         return true;
     }
     return false;
-}
-bool isMatch(char a, char b)
-{
-    return ((a == '(' && b == ')') || (a == '{' && b == '}') || (a == '[' && b == ']'));
-}
-bool isValid1(string str)
-{
-    stack<int> s;
-    for (int i = 0; i < str.length(); i++)
-    {
-        char curr = str[i];
-        if (isOpening(curr))
-        {
-            s.push(curr);
-        }
-        else
-        {
-            if (s.empty())
-            {
-                return false;
-            }
-            else if (!isMatch(s.top(), curr))
-            {
-                return false;
-            }
-            else
-            {
-                s.pop();
-            }
-        }
-    }
-    return (s.empty());
 }
 
 // APPROACH 2
@@ -104,6 +104,6 @@ bool isValid2(string s)
 int main()
 {
     string s = "{[()]}";
-    cout << isValid1(s) << endl;
+    cout << isValid2(s) << endl;
     return 0;
 }
