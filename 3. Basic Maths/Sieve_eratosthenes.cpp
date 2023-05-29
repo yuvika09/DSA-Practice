@@ -11,7 +11,7 @@ void SieveOfEratosthenes(int n)
         if (prime[p])
         {
             countPrime++;
-            for (int i = p * p; i <= n; i = i + p)
+            for (int i = p * p; i <= n; i = i + p) // if p^2 is less than n
             {
                 prime[i] = false;
             }

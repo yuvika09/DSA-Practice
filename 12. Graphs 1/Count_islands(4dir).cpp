@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(int row, int col, vector<vector<char>> grid)
+void dfs(int row, int col, vector<vector<char>> &grid)
 {
     int n = grid.size();
     int m = grid[0].size();

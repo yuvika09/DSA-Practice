@@ -3,48 +3,31 @@
 #define ull unsigned long long
 #define gcd(a, b) __gcd(a, b)
 #define lcm(a, b) (a * b / gcd(a, b))
-
+ 
 using namespace std;
-class Solution
+ 
+void solve()
 {
-public:
-    bool isValid(string s)
+    int n;
+    cin >> n;
+    int a[n];
+    for (int i = 0; i < n; i++)
     {
-        stack<char> st;
-        for (int i = 0; i < s.length(); i++)
-        {
-            if (s[i] == '(' || s[i] == '{' || s[i] == '[')
-            {
-                st.push(s[i]);
-            }
-            else
-            {
-                if (s.empty()) // i/p == {
-                {
-                    return false;
-                }
-                if (s[i] == ')' && st.top() == '(')
-                {
-                    st.pop();
-                }
-                else if (s[i] == '}' && st.top() == '{')
-                {
-                    st.pop();
-                }
-                else if (s[i] == ']' && st.top() == '[')
-                {
-                    st.pop();
-                }
-                else // i/p == }
-                {
-                    return false;
-                }
-            }
-        }
-        if (st.size() == 0)
-        {
-            return true;
-        }
-        return false;
+        cin >> a[i];
     }
-};
+    
+}
+ 
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL), cout.tie(NULL);
+    int q = 1;
+    cin >> q;
+    while (q--)
+    {
+        solve();
+        cout << endl;
+    }
+    return 0;
+}

@@ -5,15 +5,15 @@ bool isValid(vector<vector<char>> &matrix, int row, int col, char c)
 {
     for (int i = 0; i < 9; i++)
     {
-        if (matrix[row][i] == c)
+        if (matrix[row][i] == c && i != col)
         {
             return false;
         }
-        if (matrix[i][col] == c)
+        if (matrix[i][col] == c && i != row)
         {
             return false;
         }
-        if (matrix[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)
+        if (matrix[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c && (3 * (row / 3) + i / 3) != row && (3 * (col / 3) + i % 3) != col)
         {
             return false;
         }
