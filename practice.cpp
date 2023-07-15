@@ -1,33 +1,49 @@
 #include <bits/stdc++.h>
 #define ll long long
-#define ull unsigned long long
-#define gcd(a, b) __gcd(a, b)
-#define lcm(a, b) (a * b / gcd(a, b))
- 
 using namespace std;
- 
-void solve()
+
+bool func(ll x, vector<ll> &arr)
 {
-    int n;
-    cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++)
+    ll count = 1, maxm = arr[0], minm = arr[0];
+    for (ll i = 1; i < arr.size(); i++)
     {
-        cin >> a[i];
+        maxm = arr[i];
+        if (((maxm - minm + 1) / 2) > x)
+        {
+            count++;
+            minm = arr[i];
+        }
     }
-    
+    if (count > 3)
+        return false;
+    return true;
 }
- 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL), cout.tie(NULL);
-    int q = 1;
-    cin >> q;
-    while (q--)
+    ll t;
+    cin >> t;
+    while (t--)
     {
-        solve();
-        cout << endl;
+        ll n;
+        cin >> n;
+        vector<ll> arr(n, 0);
+        for (ll i = 0; i < n; i++)
+            cin >> arr[i];
+        sort(arr.begin(), arr.end());
+        ll low = 0, high = 1e9, ans = 1e9;
+        while (low <= high)
+        {
+            ll mid = (low + high) / 2;
+            if (func(mid, arr))
+            {
+                ans = mid, high = mid - 1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
+        cout << ans << endl;
     }
     return 0;
 }
