@@ -1,6 +1,7 @@
 // Find the missing and repeating number in the given array
 
 #include <bits/stdc++.h>
+#define ll long long
 using namespace std;
 
 // APPROACH 1 - hashing O(N), O(N)
@@ -26,7 +27,27 @@ void findMissingRepeating1(vector<int> &nums)
     cout << miss << " " << rep;
 }
 
-// APPROACH2 - XOR
+// APPROACH 2 - Using maths
+vector<int> repeatedNumber(const vector<int> &arr)
+{
+    int x, y;
+    int n = arr.size();
+    ll sum = 0, sqSum = 0;
+    sum = (n * (n + 1)) / 2;
+    sqSum = (n * (n + 1) * ((2 * n) + 1)) / 6;
+
+    for (int i = 0; i < n; i++)
+    {
+        sum -= (ll)arr[i];
+        sqSum -= ((ll)arr[i] * (ll)arr[i]);
+    }
+
+    x = (sqSum - (sum * sum)) / (2 * sum);
+    y = sum + x;
+    return {x, y};
+}
+
+// APPROACH 3 - XOR
 vector<int> repeatedNumber(const vector<int> &arr)
 {
     /* Will hold xor of all elements and numbers from 1 to n */

@@ -1,33 +1,41 @@
+// Task 1:
+// Number guessing game:
+
 #include <bits/stdc++.h>
-#define ll long long
-#define ull unsigned long long
-#define gcd(a, b) __gcd(a, b)
-#define lcm(a, b) (a * b / gcd(a, b))
- 
 using namespace std;
- 
-void solve()
-{
-    int n;
-    cin >> n;
-    int a[n];
-    for (int i = 0; i < n; i++)
-    {
-        cin >> a[i];
-    }
-    
-}
- 
+
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL), cout.tie(NULL);
-    int q = 1;
-    cin >> q;
-    while (q--)
+    srand(time(0)); // add the random number generator
+
+    int randNum = rand() % 10 + 1; // Generate a random number between 1 and 10
+
+    int guess, attempts = 0; // add variable to store values
+
+    cout << "Welcome to the Number Guessing Game! " << endl;
+    cout << endl;
+
+    do
     {
-        solve();
-        cout << endl;
-    }
+        cout << "Enter Your guess (between 1 and 10): " << endl;
+        cin >> guess;
+
+        // check if the guess is too high or too low
+        if (guess > randNum)
+        {
+            cout << "Oops Sorry!! Try a smaller value. " << endl;
+        }
+        else if (guess < randNum)
+        {
+            cout << "Oops Sorry!! Try a larger value. " << endl;
+        }
+
+        attempts++; //keep track of the no. of attempts
+
+    } while (guess != randNum);
+
+    cout << "Congratulations! You guessed the number in " << attempts << " attempts." << endl;
+    cout << endl;
+
     return 0;
 }

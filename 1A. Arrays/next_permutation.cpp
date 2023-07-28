@@ -16,19 +16,17 @@ void nextPermutation(vector<int> &nums)
     if (i < 0)
     {
         reverse(nums.begin(), nums.end());
+        return;
     }
-    else
+    for (j = n - 1; j > i; j--)
     {
-        for (j = n - 1; j > i; j--)
+        if (nums[j] > nums[i])
         {
-            if (nums[j] > nums[i])
-            {
-                break;
-            }
+            break;
         }
-        swap(nums[j], nums[i]);
-        reverse(nums.begin() + i + 1, nums.end());
     }
+    swap(nums[j], nums[i]);
+    reverse(nums.begin() + i + 1, nums.end());
 }
 
 int main()
